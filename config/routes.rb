@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
 ## User Routes
-  post "users/login", to: "users#create"
+  get "users/login", to: "users#create"
   post "users/register", to: "users#new"
 
 ## Deck Routes
