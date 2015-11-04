@@ -1,7 +1,15 @@
 class UsersController < ApplicationController
 
-  def create
 
+  def create
+    @user = User.find_by(username: params["username"])
+    if @user && @user.authenticate(params["password"])
+      render "create.json.jbuilder", status: :created
+    else
+      render json: { error: "User or password incorrect. So sorry you aren't getting in!" },
+             status: :unauthorized
+
+    end
   end
 
   def new
