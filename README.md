@@ -23,13 +23,13 @@ Register a new user and receive back the new user's access key and user id.
 
 **Response**
 
-If successful, you will recieve:
+If successful, you will receive:
 
 	Status Code: 201 - Created
 	
 ```json
 	{ "user": 
-			{ "user_id": 1
+			{ "user_id": 1,
 			  "access_key": "biglongaccesskeyhere"
 			}
 	}
@@ -63,14 +63,14 @@ If unsuccessful, you will receive:
 
 **Response**
 
-If successful, you will recieve:
+If successful, you will receive:
 
-	Status Code: 201 - Created
+	Status Code: 202 - Accepted
 	
 ```json
 	{ "user": 
-			{ "user_id": 1
-			  "access_key": "biglongaccesskeyhere"
+			{ "user_id": 1,
+			  "access_key": "biglongaccesskeyhere",
 			  "username": "myusername"
 			}
 	}
