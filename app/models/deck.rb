@@ -1,6 +1,7 @@
 class Deck < ActiveRecord::Base
-  before_validation :ensure_access_key!
+  belongs_to :user
+  has_many :cards
 
-  validates_presence_of :title
+  validates_presence_of :title, :user_id
 
 end

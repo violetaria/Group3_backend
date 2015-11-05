@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20151105153031) do
   enable_extension "plpgsql"
 
   create_table "decks", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",    null: false
     t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
