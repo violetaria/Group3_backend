@@ -12,13 +12,15 @@ class DecksController < ApplicationController
   end
 
   def index
-    #user_id = params["user_id"]
-    #if (user_id)
-      #@decks =
-    #else
+    render "index.json.jbuilder", status: :ok unless params["user_id"]
+
+    user = User.find(id: params["user_id"])
+    if user && (user.id == current_user.id)
+      @decks = user.decks
+    else
       @decks = Deck.all
-      render "index.json.jbuilder", status: :ok
-    #end
+    end
+
   end
 
 end
