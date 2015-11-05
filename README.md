@@ -106,7 +106,7 @@ If unsuccessful, you will receive:
 
 *Required* 
 
-***HEADERS*** : Auth-Key = string
+***HEADERS*** : Access-Key = string
 
 ***Form Parameters***
 
@@ -152,7 +152,7 @@ If unsuccessful, you will receive:
 
 *Required* 
 
-***HEADERS*** : Auth-Key = string
+***HEADERS*** : Access-Key = string
 
 *Optional*
 
