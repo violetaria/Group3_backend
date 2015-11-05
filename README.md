@@ -124,6 +124,7 @@ If successful, you will receive:
 ```json
 	{ "deck": 
 			{ "user_id": 1,
+			  "id": 3,
 			  "owner": "terric",
 			  "title": "my awesome deck"
 			}
@@ -169,12 +170,12 @@ If successful, you will receive:
 ```json
 		{"decks":	[
 						{ 	
-						"deck_id":1,
+						"id":1,
 						"title":"test title",
 						"owner":"mans"	
 						},
 						{	
-						"deck_id":2,
+						"id":2,
 						"title":"cats",
 						"owner":"terri"	
 						}
