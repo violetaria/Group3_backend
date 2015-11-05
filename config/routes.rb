@@ -15,10 +15,10 @@ Rails.application.routes.draw do
   
 
 ## Deck Routes
-#  get "decks", to: "decks#index"
-#  get "users/:id/decks", to: "decks#????"
-#  post "decks/:id", to: "decks#create"
-#  put "decks/:id", to: "decks#update"
+  # get all the available decks
+  get "/decks", to: "decks#index"
+  post "/decks", to: "decks#create"
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

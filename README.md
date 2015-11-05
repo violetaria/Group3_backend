@@ -13,13 +13,15 @@ Register a new user and receive back the new user's access key and user id.
 **Method** POST
 
 **Request**
-
-*Required* 
 	
-* username = String
-* fullname = String
-* email = String (must follow format text@text.text)
-* password = String
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| username  | String | *(Required)*  unique username |
+| fullname      | String      |  *(Required)*   User's first and last name |
+| email | String      | *(Required)*   User's email (must follow format text@text.text) |
+| password | String | *(Requred)* User's password
+
 
 **Response**
 
@@ -50,16 +52,18 @@ If unsuccessful, you will receive:
 
 ### Login ###
 
+Users can get their access_key by sending a username/password.
+
 **URL** /users/login
 
 **Method** POST
 
 **Request**
 
-*Required* 
-
-* username = String
-* password = String
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| username| String | *(Required)* Existing user's username | 
+| password | String | *(Required)* User's password | 
 
 **Response**
 
@@ -84,6 +88,108 @@ If unsuccessful, you will receive:
 ```json
 	{ "errors": [ 
 				"User or password incorrect. So sorry you aren't getting in!"
+				] 
+	}
+```
+
+## Deck Methods
+
+### New
+
+Authenticated users can create a new deck. 
+
+Note: Users cannot have duplicate titles for decks they own.  However, two users can have decks with the same title.
+
+**URL** /decks
+
+**Method** POST
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| title| String | *(Required)* Deck title | 
+
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 201 - Created
+	
+```json
+	{ "deck": 
+			{ "user_id": 1,
+			  "id": 3,
+			  "owner": "terric",
+			  "title": "my awesome deck"
+			}
+	}
+			
+```
+
+If unsuccessful, you will receive:
+
+	Status Code: 422 - Unprocessable Entity
+	
+```json
+	{ "errors": [ 
+				"Title has already been taken"
+				] 
+	}
+```
+
+### List
+
+Authenticated users can list ALL decks available or only decks that they have created.
+
+**URL** /decks
+
+**Method** GET
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| owner| String | *(Required)* 'all' for all decks or 'mine' for decks created by the authenticated user | 
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+	
+```json
+		{"decks":	[
+						{ 	
+						"id":1,
+						"title":"test title",
+						"owner":"mans"	
+						},
+						{	
+						"id":2,
+						"title":"cats",
+						"owner":"terri"	
+						}
+					]
+		}	
+```
+
+If unsuccessful, you will receive:
+
+	Status Code: 404 - Not Found
+	
+```json
+	{ "errors": [ 
+				"User 'cats' not found"
 				] 
 	}
 ```

@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20151105153827) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "decks", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "title",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
     t.string   "fullname",        null: false
