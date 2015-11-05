@@ -9,7 +9,7 @@ use Rack::Cors do
 
   allow do
     origins '*'
-    resource '*'
+    resource '*',
       :headers => :any,
       :expose => ['Access-Token', 'expiry', 'token-type', 'uid', 'client'],
       :methods => [:get, :post, :delete, :put, :patch]
