@@ -13,15 +13,15 @@ Register a new user and receive back the new user's access key and user id.
 **Method** POST
 
 **Request**
-
-*Required* 
 	
-***Form Parameters***
 
-* username = String
-* fullname = String
-* email = String (must follow format text@text.text)
-* password = String
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| username  | String | *(Required)*  unique username |
+| fullname      | String      |  *(Required)*   User's first and last name |
+| email | String      | *(Required)*   User's email (must follow format text@text.text) |
+| password | String | *(Requred)* User's password
+
 
 **Response**
 
@@ -60,12 +60,10 @@ Users can get their access_key by sending a username/password.
 
 **Request**
 
-*Required* 
-
-***Form Parameters***
-
-* username = String
-* password = String
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| username| String | *(Required)* Existing user's username | 
+| password | String | *(Required)* User's password | 
 
 **Response**
 
@@ -98,6 +96,10 @@ If unsuccessful, you will receive:
 
 ### New
 
+Authenticated users can create a new deck. 
+
+Note: Users cannot have duplicate titles for decks they own.  However, two users can have decks with the same title.
+
 **URL** /decks
 
 **Method** POST
@@ -108,12 +110,10 @@ If unsuccessful, you will receive:
 
 ***HEADERS*** : Access-Key = string
 
-***Form Parameters***
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| title| String | *(Required)* Deck title | 
 
-* title = String 
-* user_id = Integer
-
-Note: Users cannot have duplicate titles for decks they own.  However, two users can have decks with the same title.
 
 **Response**
 
@@ -144,9 +144,11 @@ If unsuccessful, you will receive:
 
 ### List
 
+Authenticated users can list ALL decks available or only decks that they have created.
+
 **URL** /decks
 
-**Method** GeT
+**Method** GET
 
 **Request**
 
@@ -154,13 +156,9 @@ If unsuccessful, you will receive:
 
 ***HEADERS*** : Access-Key = string
 
-*Optional*
-
-***Form Parameters***
-
-* user_id = Integer
-
-Note: If a User ID is provided, the decks returned are the decks that were created by that User
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| owner| String | *(Required)* 'all' for all decks or 'mine' for decks created by the authenticated user | 
 
 **Response**
 
@@ -169,13 +167,19 @@ If successful, you will receive:
 	Status Code: 200 - OK
 	
 ```json
-	{"deck":	{
-				"deck_id":1,
-				"owner":"man",
-				"user_id":3,
-				"title":"Cool Cats"
-				}
-	}			
+		{"decks":	[
+						{ 	
+						"deck_id":1,
+						"title":"test title",
+						"owner":"mans"	
+						},
+						{	
+						"deck_id":2,
+						"title":"cats",
+						"owner":"terri"	
+						}
+					]
+		}	
 ```
 
 If unsuccessful, you will receive:
