@@ -141,3 +141,51 @@ If unsuccessful, you will receive:
 				] 
 	}
 ```
+
+### List
+
+**URL** /decks
+
+**Method** GeT
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Auth-Key = string
+
+*Optional*
+
+***Form Parameters***
+
+* user_id = Integer
+
+Note: If a User ID is provided, the decks returned are the decks that were created by that User
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+	
+```json
+	{"deck":	{
+				"deck_id":1,
+				"owner":"man",
+				"user_id":3,
+				"title":"Cool Cats"
+				}
+	}			
+```
+
+If unsuccessful, you will receive:
+
+	Status Code: 404 - Not Found
+	
+```json
+	{ "errors": [ 
+				"User 'cats' not found"
+				] 
+	}
+```
+
