@@ -12,26 +12,14 @@ class DecksController < ApplicationController
   end
 
   def index
-    params[:decks]  # all
-
-    if params[:decks].nil?
+    if params["owner"] == "mine"
       @decks = current_user.decks
-    elsif params[:decks] == "all"
-    else
-      render
-
-    end
-    @decks = Deck.all
-    render "index.json.jbuilder", status: :ok unless params["user_id"]
-
-    user = User.find(params["user_id"])
-
-    render json: { errors: "User not found!"}, status: :not_found unless user
-
-    if user && (user.id == current_user.id)
-      @decks = user.decks
-    else
+      render "index.json.jbuilder", status: :ok
+    elsif params["owner"] == "all"
       @decks = Deck.all
+      render "index.json.jbuilder", status: :ok
+    else
+      render json: { errors: "Please specify whether you want 'all' decks or just 'mine'!"}, status: :unprocessable_entity
     end
 
   end
