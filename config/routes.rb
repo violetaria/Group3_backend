@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   ## Card Routes
   get "decks/:id/cards", to: "cards#index"
-  post "decks/:id/cards", to:"cards#new"
+  post "decks/:id/cards", to:"cards#create"
   
 
 ## Deck Routes
