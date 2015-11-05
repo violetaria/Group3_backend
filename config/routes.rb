@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   post "users/login", to: "users#create"
   post "users/register", to: "users#new"
 
+  ## Card Routes
+  get "decks/:id/cards", to: "cards#index"
+  post "decks/:id/cards", to:"cards#new"
+  
+
 ## Deck Routes
   # get all the available decks
   get "/decks", to: "decks#index"
