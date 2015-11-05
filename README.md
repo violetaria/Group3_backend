@@ -30,7 +30,7 @@ If successful, you will recieve:
 ```json
 	{ "user": 
 			{ "user_id": 1
-			  "access_key": biglongaccesskeyhere
+			  "access_key": "biglongaccesskeyhere"
 			}
 	}
 			
@@ -82,7 +82,7 @@ If unsuccessful, you will receive:
 	Status Code: 401 - Unauthorized
 	
 ```json
-	{ errors: [ 
+	{ "errors": [ 
 				"User or password incorrect. So sorry you aren't getting in!"
 				] 
 	}
