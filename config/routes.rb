@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 ## Deck Routes
   # get all the available decks
   get "/decks", to: "decks#index"
-  post "/decks", to: "decks#new"
+  post "/decks", to: "decks#create"
 
 
   # Example of regular route:
