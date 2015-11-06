@@ -26,6 +26,12 @@ class CardsController < ApplicationController
     render "destroy.json.jbuilder", status: :ok
   end
 
+  def edit
+    @card =Card.find(params[:id])
+    @card.update(front: params[:front], back: params[:back])
+    render "edit.json.jbuilder", status: :ok
+  end
+
 
     # render json: { id: card.id, front: card.front, back: card.back, deck_id: card.deck_id}
     #redirect_to cards_path(card.link_id)

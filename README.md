@@ -211,8 +211,7 @@ No card can have the same front or back.
 ***HEADERS*** : Access-Key = string
 
 | Parameter        | Type           | Description  |
-| ------------- |:-------------:|:----- |
-| deck_id| String | *(Required)*| Deck Id | 
+| ------------- |:-------------:|:----- | 
 | front  | String | *(Required)*|Front of card|
 | back   | String | *(Required)*|Back of card|
 
@@ -229,8 +228,88 @@ If successful, you will receive:
 	}
 ```	
 Status Code: 201 - Created	
+
+
+If unsuccessful, you will receive:
+
+	Status Code: 422 - Unprocessable Entity
 	
-I
+```json
+	{ "errors": [ 
+				"Front or backside has already
+				 been entered"
+				] 
+	}
+```
+###Edit
+
+Users can delete cards within the deck.
+
+**URL** /cards/:id/
+
+**Method** put 
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| front  | String | *(Required)*|Front of card|
+| back   | String | *(Required)*|Back of card|
+
+**Response**
+
+If successful, you will receive:
+
+{"card":{"id":1,"front":"hellp","back":"Cardy","deck_id":1}}
+
+###Index
+
+Users may pull up all the cards listed in the deck.
+
+**URL** /decks/:id/cards
+
+**Method** get 
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| front  | String | *(Required)*|Front of card|
+| back   | String | *(Required)*|Back of card|
+
+**Response**
+
+If successful, you will receive:
+
+```
+{"cards":[{"id":1,"front":"hello","back":"world"},{"id":4,"front":"hello","back":"world"},{"id":5,"front":"hello2","back":"world2"},{"id":6,"front":"Flashy","back":"Cardy"}]}
+	}
+```	
+Status Code: 201 - Created	
+	
+
+If unsuccessful, you will receive:
+
+	Status Code: 422 - Unprocessable Entity
+	
+```json
+	{ "errors": [ 
+				"Front or backside has already
+				 been entered"
+				] 
+	}
+```
+
+Status Code: 201 - Created	
+	
 
 If unsuccessful, you will receive:
 
