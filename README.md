@@ -200,9 +200,10 @@ If unsuccessful, you will receive:
 Users can create new cards within the deck.  
 No card can have the same front or back.
 
-**URL** /decks/card
+**URL** /decks/:id/cards
 
-**Method** post "decks/:id/cards", to:"cards#create"
+**Method** post 
+
 **Request**
 
 *Required* 
@@ -211,8 +212,9 @@ No card can have the same front or back.
 
 | Parameter        | Type           | Description  |
 | ------------- |:-------------:|:----- |
-| deck_id| String | *(Required)* Deck Id | 
-
+| deck_id| String | *(Required)*| Deck Id | 
+| front  | String | *(Required)*|Front of card|
+| back   | String | *(Required)*|Back of card|
 
 **Response**
 
