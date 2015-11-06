@@ -4,7 +4,7 @@ class DecksController < ApplicationController
   def create
     @deck = current_user.decks.new(title: params["title"])
     if @deck.save
-      render "new.json.jbuilder", status: :created
+      render "create.json.jbuilder", status: :created
     else
       render json: { errors: @deck.errors.full_messages },
              status: :unprocessable_entity
@@ -24,8 +24,8 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    deck = current_user.decks.find(params["id"])
-    if deck
+    deck = Deck.find(params["id"])
+    if deck.user_id == current_user.id
       deck.destroy
       render json: { success: "Deck deleted successfully" }, status: :ok
     else
@@ -34,14 +34,12 @@ class DecksController < ApplicationController
   end
 
   def update
-    deck = current_user.decks.find(params["id"])
-    if deck
-      if params["title"].nil?
-        render json: { error: "Title cannot be blank!"}, status: :unprocessable_entity
-      else
-        deck.update(title: params["title"])
-        render json: { success: "Deck updated successfully"}, status: :ok
-      end
+    deck = Decks.find(params["id"])
+    if params["title"].nil?
+       render json: { error: "Title cannot be blank!"}, status: :unprocessable_entity
+    elsif deck.user_id == current_user.id
+      deck.update(title: params["title"])
+      render json: { success: "Deck updated successfully"}, status: :ok
     else
       render json: { errors: "That deck doesn't belong to you!" }, status: :unauthorized
     end

@@ -16,4 +16,9 @@ class ApplicationController < ActionController::Base
              status: :unauthorized
     end
   end
+
+  rescue_from ActiveRecord::RecordNotFound do |error|
+    render json: { errors: "Object not found: #{error.message}" }, status: :not_found
+  end
+
 end
