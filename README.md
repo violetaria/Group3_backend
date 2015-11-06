@@ -94,7 +94,7 @@ If unsuccessful, you will receive:
 
 ## Deck Methods
 
-### New
+### New Deck
 
 Authenticated users can create a new deck. 
 
@@ -143,7 +143,7 @@ If unsuccessful, you will receive:
 	}
 ```
 
-### List
+### List Decks
 
 Authenticated users can list ALL decks available or only decks that they have created.
 
@@ -190,6 +190,93 @@ If unsuccessful, you will receive:
 ```json
 	{ "errors": [ 
 				"User 'cats' not found"
+				] 
+```
+
+### Edit Deck
+
+Authenticated users can edit a deck that they have created.
+
+**URL** /decks/:id
+
+**Method** PATCH
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| id| Integer | *(Required)* Deck ID that you wish to edit.  Must be a deck created by the Authenticated User | 
+| title | String | *(Required)* New deck title.  Cannot be blank. |
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+	
+```json
+		{"success":	"Deck updated successfully"
+		}	
+```
+
+If unsuccessful, you will receive:
+
+	Status Code: 401 - Not Authorized
+	
+```json
+	{ "errors": [ 
+				"That deck doesn't belong to you!"
+				] 
+```
+
+	Status Code: 422 - Unprocessable Entity
+	
+```json
+	{ "errors": [ 
+				"Title cannot be blank!"
+				] 
+```
+
+### Delete Deck
+
+Authenticated users can delete a deck that they have created.  All cards created for that deck will also be deleted.
+
+**URL** /decks/:id
+
+**Method** DELETE
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| id| Integer | *(Required)* Deck ID that you wish to edit.  Must be a deck created by the Authenticated User | 
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+	
+```json
+		{"success":	"Deck deleted successfully"
+		}	
+```
+
+If unsuccessful, you will receive:
+
+	Status Code: 401 - Not Authorized
+	
+```json
+	{ "errors": [ 
+				"That deck doesn't belong to you!"
 				] 
 ```
 

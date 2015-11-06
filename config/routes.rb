@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   # get all the available decks
   get "/decks", to: "decks#index"
   post "/decks", to: "decks#create"
-
+  delete "decks/:id", to: "decks#destroy"
+  patch "decks/:id", to: "decks#update"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
