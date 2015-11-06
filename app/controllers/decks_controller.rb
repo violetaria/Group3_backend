@@ -24,8 +24,8 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    deck = current_user.decks.find(params["id"])
-    if deck
+    deck = Deck.find(params["id"])
+    if deck.user_id == current_user.id
       deck.destroy
       render json: { success: "Deck deleted successfully" }, status: :ok
     else
