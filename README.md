@@ -191,5 +191,53 @@ If unsuccessful, you will receive:
 	{ "errors": [ 
 				"User 'cats' not found"
 				] 
+```
+
+***Card Methods***
+
+###Create
+
+Users can create new cards within the deck.  
+No card can have the same front or back.
+
+**URL** /decks/card
+
+**Method** post "decks/:id/cards", to:"cards#create"
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| deck_id| String | *(Required)* Deck Id | 
+
+
+**Response**
+
+If successful, you will receive:
+
+```json
+	{"card":
+			{"id":6,
+			"front":"Flashy",
+			"back":"Cardy","
+			deck_id":1}}
+	}
+```	
+Status Code: 201 - Created	
+	
+I
+
+If unsuccessful, you will receive:
+
+	Status Code: 422 - Unprocessable Entity
+	
+```json
+	{ "errors": [ 
+				"Front or backside has already
+				 been entered"
+				] 
 	}
 ```
