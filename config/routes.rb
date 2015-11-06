@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   delete "decks/:id", to: "decks#destroy"
   patch "decks/:id", to: "decks#update"
 
+
+## Guess Routes
+  post "/cards/:id/guess", to: "guesses#create"
+  get "/cards/:id/guess", to: "guesses#index"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
