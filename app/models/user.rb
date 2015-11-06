@@ -4,10 +4,9 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_access_key!
 
-  validates_presence_of :username
-  validates_uniqueness_of :email, :username
+  validates_presence_of :username, :email, :access_key, :fullname
+  validates_uniqueness_of :email, :username, :access_key
   validates_format_of :email, with: /.+@.+\..+/
-  validates :access_key, presence: true, uniqueness: true
 
   def ensure_access_key!
      if self.access_key.blank?
