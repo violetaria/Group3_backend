@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :decks
   has_many :guesses
-  has_many :cards, through :guesses
+  has_many :cards, through: :guesses
 
   before_validation :ensure_access_key!
 
