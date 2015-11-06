@@ -35,9 +35,13 @@ class DecksController < ApplicationController
 
   def update
     deck = current_user.decks.find(params["id"])
-    if deck # not sure if need to check for title being blank
-      deck.update(title: params["title"])
-      render json: { success: "Deck updated successfully"}, status: :ok
+    if deck
+      if params["title"].nil?
+        render json: { error: "Title cannot be blank!"}, status: :unprocessable_entity
+      else
+        deck.update(title: params["title"])
+        render json: { success: "Deck updated successfully"}, status: :ok
+      end
     else
       render json: { errors: "That deck doesn't belong to you!" }, status: :unauthorized
     end
