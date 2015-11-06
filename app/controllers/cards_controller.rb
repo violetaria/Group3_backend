@@ -11,9 +11,14 @@ class CardsController < ApplicationController
       else render json: {errors: @card.errors.full_messages},
         status: :unproccessable_entity
       end  
+  end  
     
-    
-
+  def index
+    #binding.pry
+    @deck = Deck.find(params[:id])
+    @cards = @deck.cards
+    render "index.json.jbuilder", status: :ok
+  end
 
 
     # render json: { id: card.id, front: card.front, back: card.back, deck_id: card.deck_id}
@@ -36,4 +41,3 @@ class CardsController < ApplicationController
   #   card.destroy
   #   redirect_to cards_path
   # end
-end
