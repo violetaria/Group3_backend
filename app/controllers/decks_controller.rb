@@ -21,7 +21,26 @@ class DecksController < ApplicationController
     else
       render json: { errors: "Please specify whether you want 'all' decks or just 'mine'!"}, status: :unprocessable_entity
     end
+  end
 
+  def destroy
+    deck = current_user.decks.find(params["id"])
+    if deck
+      deck.destroy
+      render json: { success: "Deck deleted successfully" }, status: :ok
+    else
+      render json: { errors: "That deck doesn't belong to you!" }, status: :unauthorized
+    end
+  end
+
+  def update
+    deck = current_user.decks.find(params["id"])
+    if deck # not sure if need to check for title being blank
+      deck.update(title: params["title"])
+      render json: { success: "Deck updated successfully"}, status: :ok
+    else
+      render json: { errors: "That deck doesn't belong to you!" }, status: :unauthorized
+    end
   end
 
 end
