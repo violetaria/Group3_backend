@@ -4,7 +4,7 @@ class DecksController < ApplicationController
   def create
     @deck = current_user.decks.new(title: params["title"])
     if @deck.save
-      render "new.json.jbuilder", status: :created
+      render "create.json.jbuilder", status: :created
     else
       render json: { errors: @deck.errors.full_messages },
              status: :unprocessable_entity
