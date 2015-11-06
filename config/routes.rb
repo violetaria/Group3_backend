@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   ## Card Routes
   get "decks/:id/cards", to: "cards#index"
   post "decks/:id/cards", to:"cards#create"
+  delete "cards/:id", to: "cards#destroy"
   
 
 ## Deck Routes

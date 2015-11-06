@@ -20,6 +20,12 @@ class CardsController < ApplicationController
     render "index.json.jbuilder", status: :ok
   end
 
+  def destroy
+    card = Card.find(params[:id])
+    card.destroy
+    render "destroy.json.jbuilder", status: :ok
+  end
+
 
     # render json: { id: card.id, front: card.front, back: card.back, deck_id: card.deck_id}
     #redirect_to cards_path(card.link_id)
