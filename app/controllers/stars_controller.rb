@@ -4,9 +4,9 @@ class StarsController < ApplicationController
     deck = Deck.find(params[:id])
     star = deck.stars.new(user_id: current_user.id)
     if star.save
-      render json: { success: "Deck starred successfully" }, status: :ok
+      render "create.json.jbuilder", status: :ok
     else
-      render json: { errors: star.errors.full_message }, status: :unprocessable_entity
+      render json: { error: star.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
