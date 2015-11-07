@@ -12,6 +12,8 @@ class StarsController < ApplicationController
 
   def index
     deck = Deck.find(params[:id])
-    binding.pry
+    @stars = deck.stars
+    render "index.json.jbuilder", status: :ok
   end
+
 end
