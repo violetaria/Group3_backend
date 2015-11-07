@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :guesses
   has_many :cards, through: :guesses
   has_many :stars
-  has_many :starred_decks, through: :stars, source: :decks
+  has_many :starred_decks, through: :stars, source: :deck
 
   before_validation :ensure_access_key!
 
