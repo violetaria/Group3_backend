@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "decks/:id/cards", to: "cards#index"
   post "decks/:id/cards", to:"cards#create"
   delete "cards/:id", to: "cards#destroy"
+  put "cards/:id", to: "cards#edit"
   
 
 ## Deck Routes

@@ -15,7 +15,14 @@ Welcome to the flashbang API docs, hope you find what you are looking for here!
 	* [Delete Deck](#deck-delete)
 
 * [Card Methods](#card-methods)
-	* [Create Card](#card-create)	 
+	* [Create Card](#card-create)	
+	* [List Cards](#card-list)
+	* [Edit Card](#card-edit)
+	* [Delete Card](#card-delete)
+
+* [User Guess Methods](#guess-methods)
+	* [Create Guess](#guess-create)
+	* [List Guess Stats](#guess-list)
 
 ##<a name="user-methods"></a>User Methods
 
@@ -301,14 +308,15 @@ If unsuccessful, you will receive:
 
 ##<a name="card-methods"></a>Card Methods
 
-###<a name="card-create"></a>Create
+###<a name="card-create"></a>Create Card
 
 Users can create new cards within the deck.  
 No card can have the same front or back.
 
 **URL** /decks/card
 
-**Method** post "decks/:id/cards", to:"cards#create"
+**Method** POST
+
 **Request**
 
 *Required* 
@@ -316,13 +324,15 @@ No card can have the same front or back.
 ***HEADERS*** : Access-Key = string
 
 | Parameter        | Type           | Description  |
-| ------------- |:-------------:|:----- |
-| deck_id| String | *(Required)* Deck Id | 
-
+| ------------- |:-------------:|:----- | 
+| front  | String | *(Required)*|Front of card|
+| back   | String | *(Required)*|Back of card|
 
 **Response**
 
 If successful, you will receive:
+
+	Status Code: 201 - Created	
 
 ```json
 	{"card":
@@ -332,9 +342,7 @@ If successful, you will receive:
 			deck_id":1}}
 	}
 ```	
-Status Code: 201 - Created	
-	
-I
+
 
 If unsuccessful, you will receive:
 
@@ -347,8 +355,126 @@ If unsuccessful, you will receive:
 				] 
 	}
 ```
+###<a name="card-edit"></a>Edit Card
 
-##<a name="guess-methods></a>User Guess Methods
+Users can delete cards within the deck.
+
+**URL** /cards/:id/
+
+	:id = existing Deck ID
+
+**Method** PUT 
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| front  | String | *(Required)*|Front of card|
+| back   | String | *(Required)*|Back of card|
+
+**Response**
+
+If successful, you will receive:
+
+```json 
+		{ "card":
+					{
+						"id":1,
+						"front":"hellp",
+						"back":"Cardy",
+						"deck_id":1
+						}
+		}
+```
+
+###<a name="card-list"></a>List Cards
+
+Users may pull up all the cards listed in the deck.
+
+**URL** /decks/:id/cards
+
+	:id = existing Deck ID
+
+**Method** GET 
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| front  | String | *(Required)*|Front of card|
+| back   | String | *(Required)*|Back of card|
+
+**Response**
+
+If successful, you will receive:
+	
+	Status Code: 201 - Created	
+
+```
+	{"cards":[
+				{"id":1,"front":"hello","back":"world"},
+				{"id":4,"front":"hello","back":"world"},
+				{"id":5,"front":"hello2","back":"world2"},
+				{"id":6,"front":"Flashy","back":"Cardy"}
+				]
+	}
+```	
+	
+
+If unsuccessful, you will receive:
+
+	Status Code: 422 - Unprocessable Entity
+	
+```json
+
+	{ "errors": [ 
+				"Front or backside has already
+				 been entered"
+				] 
+	}
+```
+
+###<a name="card-delete"></a>Delete Card
+
+Users may delete a card in the deck.
+
+**URL** /cards/:id
+
+	:id = existing Card ID
+
+**Method** DELETE 
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+
+**Response**
+
+If successful, you will receive:
+	
+	Status Code: 200 - OK
+
+```
+	{"message": "Card deleted."	}
+```	
+	
+
+If unsuccessful, you will receive:
+
+
+
+##<a name="guess-methods"></a>User Guess Methods
 
 ###<a name="guess-create"></a>Create User Guess
 
@@ -396,7 +522,7 @@ If unsuccessful, you will receive:
 	}
 ```
 
-###<a name="guess-create"></a>Get User Guesses
+###<a name="guess-list"></a>Get User Guesses
 
 Authenticated users can get guess statistics for a specific card within a deck. 
 
