@@ -28,6 +28,11 @@ Rails.application.routes.draw do
   post "/cards/:id/guess", to: "guesses#create"
   get "/cards/:id/guess", to: "guesses#index"
 
+
+## Star Routes
+  post "/decks/:id/stars", to: "stars#create"
+  get "/decks/:id/stars", to: "stars#index"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
