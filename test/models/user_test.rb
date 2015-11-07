@@ -6,7 +6,7 @@ class UserTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  def test_can_create_valid_user
+  def test_new_valid_user
     user = User.new(username: "user3",
                 fullname: "user three",
                 email: "user@three.com",
@@ -15,7 +15,7 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?
   end
 
-  def test_cannot_create_user_without_username
+  def test_new_user_no_username
     user = User.new(fullname: "user three",
                     email: "user@three.com",
                     password: "userthreepassword")
@@ -23,7 +23,7 @@ class UserTest < ActiveSupport::TestCase
     refute user.valid?
   end
 
-  def test_cannot_create_user_existing_username
+  def test_new_user_invalid_username
     user = User.new(username: "user1",
                      fullname: "user",
                      email: "user@user.com",
@@ -31,7 +31,7 @@ class UserTest < ActiveSupport::TestCase
     refute user.valid?
   end
 
-  def test_cannot_create_user_without_fullname
+  def test_new_user_no_fullname
     user = User.new(username: "user3",
                     email: "user@three.com",
                     password: "userthreepassword")
@@ -39,7 +39,7 @@ class UserTest < ActiveSupport::TestCase
     refute user.valid?
   end
 
-  def test_cannot_create_user_without_email
+  def test_new_user_no_email
     user = User.new(username: "user3",
                     fullname: "user three",
                     password: "userthreepassword")
@@ -47,7 +47,7 @@ class UserTest < ActiveSupport::TestCase
     refute user.valid?
   end
 
-  def test_cannot_create_user_without_valid_email
+  def test_new_user_invalid_email
      user = User.new(username: "user3",
                     fullname: "user three",
                     email: "@three.com",
@@ -62,7 +62,7 @@ class UserTest < ActiveSupport::TestCase
      refute user.valid?
   end
 
-  def test_cannot_create_user_without_password
+  def test_new_user_no_password
     user = User.new(username: "user3",
                     fullname: "user three",
                     email: "user@three.com")
