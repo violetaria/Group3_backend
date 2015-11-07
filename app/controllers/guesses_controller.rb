@@ -14,10 +14,24 @@ class GuessesController < ApplicationController
   def index
     card = Card.find(params["id"])
     if params["owner"] == "mine"
-      @guesses = card.current_user.guesses
-      #render "index.json.jbuilder", status: :ok
+      guesses = card.current_user.guesses
+      @guessdata = Hash.new
+      @guessdata[:count] = guesses.count
+      @guessdata[:duration] = guesses.average(:duration)
+      @guessdata[:correct] = guesses.where(correct: true).count
+      @guessdata[:incorrect] = guesses.where(correct: false).count
+      @guessdata[:fastest] = guesses.order(duration: :desc).first[:duration]
+      @guessdata[:user] = guesses.order(duration: :desc).first.user[:username]
+      render "index.json.jbuilder", status: :ok
     elsif params["owner"] == "all"
-      @guesses = card.guesses
+      guesses = card.guesses
+      @guessdata = Hash.new
+      @guessdata[:count] = guesses.count
+      @guessdata[:duration] = guesses.average(:duration)
+      @guessdata[:correct] = guesses.where(correct: true).count
+      @guessdata[:incorrect] = guesses.where(correct: false).count
+      @guessdata[:fastest] = guesses.order(duration: :desc).first[:duration]
+      @guessdata[:user] = guesses.order(duration: :desc).first.user[:username]
       render "index.json.jbuilder", status: :ok
     else
       render json: { errors: "Please specify whether you want 'all' guesses or just 'mine' for this card!"}, status: :unprocessable_entity

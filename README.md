@@ -2,9 +2,24 @@
 
 Welcome to the flashbang API docs, hope you find what you are looking for here!
 
-## User Methods
+**Methods**
 
-### Registration
+* [User Methods](#user-methods)
+	* [Registration](#user-registration)
+	* [Login](#user-login)
+
+* [Deck Methods](#deck-methods)
+	* [Create Deck](#deck-create)
+	* [List Decks](#deck-list)
+	* [Edit Deck](#deck-edit)
+	* [Delete Deck](#deck-delete)
+
+* [Card Methods](#card-methods)
+	* [Create Card](#card-create)	 
+
+##<a name="user-methods"></a>User Methods
+
+###<a name="user-registration"></a>Registration
 
 Register a new user and receive back the new user's access key and user id.
 
@@ -50,7 +65,7 @@ If unsuccessful, you will receive:
 	}
 ```
 
-### Login ###
+###<a name="user-login"></a>Login
 
 Users can get their access_key by sending a username/password.
 
@@ -92,9 +107,9 @@ If unsuccessful, you will receive:
 	}
 ```
 
-## Deck Methods
+##<a name="deck-methods></a>Deck Methods
 
-### New Deck
+###<a name="deck-create"></a>Create Deck
 
 Authenticated users can create a new deck. 
 
@@ -143,7 +158,7 @@ If unsuccessful, you will receive:
 	}
 ```
 
-### List Decks
+###<a name="deck-list"></a>List Decks
 
 Authenticated users can list ALL decks available or only decks that they have created.
 
@@ -193,11 +208,13 @@ If unsuccessful, you will receive:
 				] 
 ```
 
-### Edit Deck
+###<a name="deck-edit"></a>Edit Deck
 
 Authenticated users can edit a deck that they have created.
 
 **URL** /decks/:id
+
+	:id = existing Deck ID
 
 **Method** PATCH
 
@@ -241,11 +258,13 @@ If unsuccessful, you will receive:
 				] 
 ```
 
-### Delete Deck
+###<a name="deck-delete"></a>Delete Deck
 
 Authenticated users can delete a deck that they have created.  All cards created for that deck will also be deleted.
 
 **URL** /decks/:id
+
+	:id = existing Deck ID
 
 **Method** DELETE
 
@@ -280,17 +299,16 @@ If unsuccessful, you will receive:
 				] 
 ```
 
-***Card Methods***
+##<a name="card-methods"></a>Card Methods
 
-###Create
+###<a name="card-create"></a>Create
 
 Users can create new cards within the deck.  
 No card can have the same front or back.
 
-**URL** /decks/:id/cards
+**URL** /decks/card
 
-**Method** post 
-
+**Method** post "decks/:id/cards", to:"cards#create"
 **Request**
 
 *Required* 
@@ -299,9 +317,8 @@ No card can have the same front or back.
 
 | Parameter        | Type           | Description  |
 | ------------- |:-------------:|:----- |
-| deck_id| String | *(Required)*| Deck Id | 
-| front  | String | *(Required)*|Front of card|
-| back   | String | *(Required)*|Back of card|
+| deck_id| String | *(Required)* Deck Id | 
+
 
 **Response**
 
@@ -327,6 +344,104 @@ If unsuccessful, you will receive:
 	{ "errors": [ 
 				"Front or backside has already
 				 been entered"
+				] 
+	}
+```
+
+##<a name="guess-methods></a>User Guess Methods
+
+###<a name="guess-create"></a>Create User Guess
+
+Authenticated users can add a guess for a specific card within a deck. 
+
+Note: Users can guess multiple times on a card.  No limit to how many times a user can play with a deck or card.
+
+**URL** /cards/:id/guess
+
+	:id = existing Card ID
+
+**Method** POST
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| Duration| Integer | *(Required)* Number of seconds that the user took to guess the answer. |
+| Correct | Boolean | *(Required)* If the user got the question right or not.  Only accepted values are true and false. |
+
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 201 - Created
+	
+```json
+	{ "success": "Guess saved."	}
+			
+```
+
+If unsuccessful, you will receive:
+
+	Status Code: 422 - Unprocessable Entity
+	
+```json
+	{ "errors": [ 
+				"Error message"
+				] 
+	}
+```
+
+###<a name="guess-create"></a>Get User Guesses
+
+Authenticated users can get guess statistics for a specific card within a deck. 
+
+
+**URL** /cards/:id/guess
+
+	:id = existing Card ID
+
+**Method** GET
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| owner| String | *(Required)* 'all' for all guesses for the specified card or 'mine' for guesses created by the authenticated user | 
+
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+	
+```json
+	{ "stats": { "guess_count": 10,
+					"avg_duration": 4.5,
+					"correct_count": 5,
+					"incorrect_count": 5,
+					"fastest_duration": 2,
+					"fastest_user": "cookies" }
+	}
+			
+```
+
+If unsuccessful, you will receive:
+
+	Status Code: 422 - Unprocessable Entity
+	
+```json
+	{ "errors": [ 
+				"Please specify if you want to see 'all' guesses or just 'mine' for this card!"
 				] 
 	}
 ```
