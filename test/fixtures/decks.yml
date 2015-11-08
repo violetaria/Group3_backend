@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 deckone:
-  user_id: 1
+  user: userone
   title: "Test Deck 1"
 
 decktwo:
-  user_id: 2
+  user: usertwo
   title: "Test Deck 2"

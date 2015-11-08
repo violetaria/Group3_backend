@@ -13,20 +13,22 @@ class DeckTest < ActiveSupport::TestCase
   end
 
   def test_new_deck_invalid_title
-    deck = Deck.new(user_id: 1, title: "Title")
-    assert deck.valid?
-    deck.save
-
-    invalid_deck = Deck.new(user_id: 1, title: "Title")
+    invalid_deck = @userone.decks.new(user_id: 1, title: "Test Deck 1")
     refute invalid_deck.valid?
   end
 
-  # def test_can_delete_deck
-  #   @userone.decks.create(title: "Brand New Deck")
-  #   assert_equal 1, @userone.decks.count
-  #
-  #   @userone.decks.destroy(id: 1)
-  #   binding.pry
-  #   assert_equal 0, @userone.decks.count
-  # end
+  def test_can_delete_deck
+    original_count = @userone.decks.count
+    deck = @userone.decks.create(title: "Brand New Deck")
+    assert_equal (original_count + 1), @userone.decks.count
+
+    @userone.decks.destroy(deck)
+    assert_equal original_count, @userone.decks.count
+  end
+
+  def test_can_edit_deck
+    original_title = @deckone.title
+    @deckone.update(title: "New Title")
+    refute_equal original_title, @deckone.title
+  end
 end
