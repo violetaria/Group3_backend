@@ -24,6 +24,10 @@ Welcome to the flashbang API docs, hope you find what you are looking for here!
 	* [Create Guess](#guess-create)
 	* [List Guess Stats](#guess-list)
 
+* [Star Methods](#star-methods)
+	* [Create Deck Star](#star-create)
+	* [List Deck Stars](#star-list) 
+
 ##<a name="user-methods"></a>User Methods
 
 ###<a name="user-registration"></a>Registration
@@ -167,7 +171,7 @@ If unsuccessful, you will receive:
 
 ###<a name="deck-list"></a>List Decks
 
-Authenticated users can list ALL decks available or only decks that they have created.
+Authenticated users can list ALL decks available or only decks that they have created.  Decks now tell you how many users have starred them.  Users can only star a deck once.
 
 **URL** /decks
 
@@ -190,19 +194,22 @@ If successful, you will receive:
 	Status Code: 200 - OK
 	
 ```json
-		{"decks":	[
-						{ 	
-						"id":1,
-						"title":"test title",
-						"owner":"mans"	
-						},
-						{	
-						"id":2,
-						"title":"cats",
-						"owner":"terri"	
-						}
-					]
-		}	
+	{
+	  "decks": [
+	    {
+	      "id": 2,
+	      "title": "cats",
+	      "owner": "mans",
+	      "stars": 5
+	    },
+	    {
+	      "id": 6,
+	      "title": "kittens",
+	      "owner": "mans",
+	      "stars": 0
+	    }
+	  ]
+	}
 ```
 
 If unsuccessful, you will receive:
@@ -568,6 +575,116 @@ If unsuccessful, you will receive:
 ```json
 	{ "errors": [ 
 				"Please specify if you want to see 'all' guesses or just 'mine' for this card!"
+				] 
+	}
+```
+
+
+##<a name="star-methods"></a>Deck Star Methods
+
+###<a name="star-create"></a>Create Star
+
+Authenticated users can add a star for a specific deck. 
+
+Note: Users can only star a deck once.  
+
+**URL** /decks/:id/stars
+
+	:id = existing Deck ID
+
+**Method** POST
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+	
+```json
+	{ "success": "Star created."
+	}
+			
+```
+
+If unsuccessful, you will receive:
+
+	Status Code: 422 - Unprocessable Entity
+	
+```json
+	{ "errors": [ 
+				"Error messages"
+				] 
+	}
+```
+
+###<a name="star-list"></a>List Deck Stars
+
+Authenticated users can list the count of stars and users whos starred it for a specific deck. 
+
+Note: Users can only star a deck once.  
+
+**URL** /decks/:id/stars
+
+	:id = existing Deck ID
+
+**Method** GET
+
+**Request**
+
+*Required* 
+
+***HEADERS*** : Access-Key = string
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+	
+```json
+	{
+	  "stars": {
+	    "count": 5,
+	    "users": [
+	      {
+	        "username": "mans",
+	        "id": 3
+	      },
+	      {
+	        "username": "terri",
+	        "id": 1
+	      },
+	      {
+	        "username": "terric",
+	        "id": 2
+	      },
+	      {
+	        "username": "kitty",
+	        "id": 4
+	      },
+	      {
+	        "username": "yang",
+	        "id": 5
+	      }
+	    ]
+	  }
+	}
+			
+```
+
+If unsuccessful, you will receive:
+
+	Status Code: 422 - Unprocessable Entity
+	
+```json
+	{ "errors": [ 
+				"Error messages"
 				] 
 	}
 ```
