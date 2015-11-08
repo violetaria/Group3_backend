@@ -24,7 +24,7 @@ Welcome to the flashbang API docs, hope you find what you are looking for here!
 	* [Create Guess](#guess-create)
 	* [List Guess Stats](#guess-list)
 
-* [Star Methods](#star-methods)
+* [Deck Star Methods](#star-methods)
 	* [Create Deck Star](#star-create)
 	* [List Deck Stars](#star-list) 
 
@@ -200,13 +200,15 @@ If successful, you will receive:
 	      "id": 2,
 	      "title": "cats",
 	      "owner": "mans",
-	      "stars": 5
+	      "stars": 5,
+	      "starred_by_me": true
 	    },
 	    {
 	      "id": 6,
 	      "title": "kittens",
 	      "owner": "mans",
-	      "stars": 0
+	      "stars": 0,
+	      "starred_by_me": false
 	    }
 	  ]
 	}
