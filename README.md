@@ -416,11 +416,6 @@ Users may pull up all the cards listed in the deck.
 
 ***HEADERS*** : Access-Key = string
 
-| Parameter        | Type           | Description  |
-| ------------- |:-------------:|:----- |
-| front  | String | *(Required)*|Front of card|
-| back   | String | *(Required)*|Back of card|
-
 **Response**
 
 If successful, you will receive:
