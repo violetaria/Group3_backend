@@ -34,7 +34,7 @@ class DecksController < ApplicationController
   end
 
   def update
-    deck = Decks.find(params["id"])
+    deck = Deck.find(params["id"])
     if params["title"].nil?
        render json: { error: "Title cannot be blank!"}, status: :unprocessable_entity
     elsif deck.user_id == current_user.id
