@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-deckone:
-  user: userone
+one:
+  user: one
   title: "Test Deck 1"
 
-decktwo:
-  user: usertwo
+two:
+  user: two
   title: "Test Deck 2"
