@@ -2,9 +2,6 @@ require 'test_helper'
 require "pry"
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 
   test "can create valid user" do
     user = User.new(username: "user3",
@@ -74,7 +71,6 @@ end
      refute user1.save
 
      assert user1.errors.present?
-
   end
 
   test "cannot create user with blank password" do
@@ -84,8 +80,6 @@ end
     refute user.save
 
     assert user.errors.present?
-
   end
-
 
 end
