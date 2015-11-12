@@ -10,7 +10,7 @@ class UsersControllerTest  < ActionController::TestCase
   end
 
   test "new users cannot register with invalid inputs" do
-    assert_no_differene "User.count", -1 do
+    assert_no_difference "User.count", -1 do
       post :new, { fullname: "Test User One", email: "TestUser@Test.Com", password: "TestPassword" }
     end
 
