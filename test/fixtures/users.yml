@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-userone:
+one:
   username: "user1"
   fullname: "User One"
   email: "user@one.com"
   password_digest: "useronedigest"
   access_key: "useroneaccesskey"
 
-usertwo:
+two:
   username: "user2"
   fullname: "User Two"
   email: "user@two.com"
