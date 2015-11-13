@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  front: MyString
-  back: MyString
-  deck_id: 1
+  front: "Do you like cats?"
+  back: yes
+  deck: one
 
 two:
-  front: MyString
-  back: MyString
-  deck_id: 1
+  front: "Do you like bull terriers?"
+  back: "of course"
+  deck: two
