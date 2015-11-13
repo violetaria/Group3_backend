@@ -4,7 +4,7 @@ class CardsController < ApplicationController
 
 
   def create
-    @card = Card.new(front: params[:front], back: params[:back], deck_id: params[:id])
+    @card = current_user.decks.find(params[:id]).cards.new(front: params[:front], back: params[:back])
     #binding.pry
     if @card.save
       render 'create.json.jbuilder', status: :created 
