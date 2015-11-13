@@ -27,9 +27,13 @@ class CardsController < ApplicationController
   end
 
   def edit
-    @card =Card.find(params[:id])
-    @card.update(front: params[:front], back: params[:back])
-    render "edit.json.jbuilder", status: :ok
+    @card = Card.find(params[:id])
+    if @card.deck.user.id == current_user.id
+      @card.update(front: params[:front], back: params[:back])
+      render "edit.json.jbuilder", status: :ok
+    else
+      render json: { errors: "That deck doesn't belong to you!"}, status: :unauthorized
+    end
   end
 
 
