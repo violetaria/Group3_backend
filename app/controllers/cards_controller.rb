@@ -22,8 +22,13 @@ class CardsController < ApplicationController
 
   def destroy
     card = Card.find(params[:id])
-    card.destroy
-    render "destroy.json.jbuilder", status: :ok
+    if card.deck.user_id == current_user.id
+      card.destroy
+      render "destroy.json.jbuilder", status: :ok
+    else
+      render json: { errors: "That card doesn't belong to you!"}, status: :unauthorized
+    end
+    
   end
 
   def edit
@@ -32,7 +37,7 @@ class CardsController < ApplicationController
       @card.update(front: params[:front], back: params[:back])
       render "edit.json.jbuilder", status: :ok
     else
-      render json: { errors: "That deck doesn't belong to you!"}, status: :unauthorized
+      render json: { errors: "That card doesn't belong to you!"}, status: :unauthorized
     end
   end
 
